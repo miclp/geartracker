@@ -14,15 +14,6 @@ class ApplicationController < Sinatra::Base
     erb :'/index'
   end
 
-  get '/pry' do
-    binding.pry
-  end
-
-  post '/test' do
-    binding.pry
-    redirect '/'
-  end
-
   # Helper Methods
   helpers do
     def logged_in?
