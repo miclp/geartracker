@@ -1,0 +1,10 @@
+<p>
+  Welcome, <%= @user.username %>.  Here's your gear:
+</p>
+
+<% @user.gear_items.all.each do |gear_item| %>
+  <p>
+    <a href="/gear/<%= gear_item.id %>"><%= gear_item.name %></a> 
+    <br>
+  </p>
+<% end %>
