@@ -18,4 +18,29 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/login' do
+    redirect "/gear_items" if logged_in?
+    erb :'/users/login'
+  end
+
+  post '/login' do
+    # check if credentials are good, set session?
+    if params[:username] != "" && params[:password] != ""
+      # go to the account page
+      @user = User.find_by(:username => params[:username])
+      if @user && @user.authenticate(params[:password])
+        session[:user_id] = @user.id
+        redirect "/gear_items"
+      end
+    else
+      redirect "/"
+    end
+    redirect "/login"
+  end
+
+  get '/logout' do
+    session.clear
+    redirect "/login"
+  end
+
 end
