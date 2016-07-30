@@ -4,7 +4,9 @@
 
 <% @user.gear_items.all.each do |gear_item| %>
   <p>
-    <a href="/gear/<%= gear_item.id %>"><%= gear_item.name %></a> 
+    <a href="/gear/<%= gear_item.id %>"><%= gear_item.name %></a>
     <br>
   </p>
 <% end %>
+<br>
+<a href="/gear/new">Add New Gear</a>
