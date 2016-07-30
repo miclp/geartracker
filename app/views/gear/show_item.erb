@@ -1,3 +1,5 @@
 <% @gear.attributes.each do |attribute| %>
 <%= attribute[0] %>: <%= attribute[1] %><br>
 <% end %>
+<br>
+<a href="/gear/<%= @gear.id %>/edit">Edit this piece of gear</a>

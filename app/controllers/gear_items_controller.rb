@@ -7,12 +7,12 @@ class GearItemsController < ApplicationController
   end
 
   get '/gear/new' do
+    validate_login
     # create gear item
     erb :'/gear/create'
   end
 
   post '/gear' do
-
     # create the gear_item and persist to db
     validate_login
     @user = User.find(session[:user_id])
@@ -29,19 +29,35 @@ class GearItemsController < ApplicationController
   end
 
   patch '/gear' do
+    validate_login
     # update gear item
+    @gear = GearItem.find(params[:gear_id])
+
+    @gear.name = params[:name] unless params[:name] == ""
+    @gear.description = params[:description]
+    @gear.gear_type = params[:gear_type]
+    @gear.value = params[:value]
+    @gear.year = params[:year]
+    @gear.image_url = params[:image_url]
+    @gear.notes = params[:notes]
+    @gear.save
+    redirect '/gear'
   end
 
   get '/gear/:id' do
+    validate_login
     @gear = GearItem.find(params[:id])
     erb :'/gear/show_item'
   end
 
-  get 'gear/:id/edit' do
-    # erb:'/gear/edit'
+  get '/gear/:id/edit' do
+    validate_login
+    @gear = GearItem.find(params[:id])
+    erb :'/gear/edit'
   end
 
-  post 'gear/delete' do
+  post '/gear/delete' do
+    validate_login
     #
   end
 
