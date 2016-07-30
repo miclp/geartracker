@@ -1,5 +1,7 @@
 <% @gear.attributes.each do |attribute| %>
 <%= attribute[0] %>: <%= attribute[1] %><br>
 <% end %>
+<img src="<%= @gear.image_url %>" alt="" width="200" />
 <br>
-<a href="/gear/<%= @gear.id %>/edit">Edit this piece of gear</a>
+<a href="/gear/<%= @gear.id %>/edit">Edit this piece of gear</a><br>
+<a href="/gear/<%= @gear.id %>/delete">Delete this piece of gear</a>
