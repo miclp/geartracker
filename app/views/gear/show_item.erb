@@ -5,4 +5,10 @@
 <br>
 <a href="/gear">Back to all gear</a><br>
 <a href="/gear/<%= @gear.id %>/edit">Edit this piece of gear</a><br>
-<a href="/gear/<%= @gear.id %>/delete">Delete this piece of gear</a>
+
+<form class="" action="/gear/delete" method="POST">
+  <input type="hidden" name="gear_id" value="<%= @gear.id %>">
+  <input type="submit" name="delete" value="Delete this Gear">
+</form>
+
+<!-- <a href="/gear/<%= @gear.id %>/delete">Delete this piece of gear</a> -->

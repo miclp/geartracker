@@ -58,7 +58,11 @@ class GearItemsController < ApplicationController
 
   post '/gear/delete' do
     validate_login
-    #
+    @gear = GearItem.find(params[:gear_id])
+    if @gear.user_id == session[:user_id]
+      @gear.delete
+    end
+    redirect '/gear'
   end
 
 
