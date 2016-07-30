@@ -1,0 +1,15 @@
+<h3>Edit Gear</h3>
+<form class="" action="/gear" method="POST">
+  <input type="hidden" name="_method" value="patch">
+
+  Name:  <input type="text" name="name" id="name" value="<%= @gear.name %>"><br>
+  Description: <input type="text" name="description" id="description" value="<%= @gear.description %>"><br>
+  Type: <input type="text" name="gear_type" value="<%= @gear.gear_type %>"><br>
+  Value (USD$): <input type="text" name="value" value="<%= @gear.value %>"><br>
+  Year: <input type="text" name="year" value="<%= @gear.year %>"><br>
+  Image URL: <input type="text" name="image_url" value="<%= @gear.image_url %>"><br>
+  Notes: <input type="text" name="notes" value="<%= @gear.notes %>"><br>
+
+  <input type="hidden" name="gear_id" value="<%= @gear.id %>">
+  <input type="submit" name="submit" id="submit" value="Update Gear">
+</form>
