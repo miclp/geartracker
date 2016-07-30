@@ -32,7 +32,6 @@ class GearItemsController < ApplicationController
     validate_login
     # update gear item
     @gear = GearItem.find(params[:gear_id])
-
     @gear.name = params[:name] unless params[:name] == ""
     @gear.description = params[:description]
     @gear.gear_type = params[:gear_type]
@@ -41,7 +40,7 @@ class GearItemsController < ApplicationController
     @gear.image_url = params[:image_url]
     @gear.notes = params[:notes]
     @gear.save
-    redirect '/gear'
+    redirect "/gear/#{@gear.id}"
   end
 
   get '/gear/:id' do

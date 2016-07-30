@@ -4,9 +4,9 @@
 
 <% @user.gear_items.all.each do |gear_item| %>
   <p>
-    <a href="/gear/<%= gear_item.id %>"><%= gear_item.name %></a>
+    <a href="/gear/<%= gear_item.id %>"><%= gear_item.name %><br><img src="<%= gear_item.image_url %>" alt="" width="70"/></a>
+    
     <br>
-    <img src="<%= gear_item.image_url %>" alt="" height="52" width="52"/><br>
   </p>
 <% end %>
 <br>
