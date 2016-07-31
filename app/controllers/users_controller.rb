@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 
-  # use Rack::Flash
   get '/signup' do
     redirect "/gear" if logged_in?
     erb :'/users/create_user'
@@ -8,7 +7,6 @@ class UsersController < ApplicationController
 
   post '/signup' do
     # create the user if it doesn't already exist
-
     if params[:username] != "" && params[:password] != "" && params[:email] != "" && !User.find_by(username: params[:username])
       @user = User.new(username: params[:username], password: params[:password])
       @user.save
@@ -16,7 +14,6 @@ class UsersController < ApplicationController
       flash[:message] = "Thanks for signing up!"
       redirect "/gear"
     else
-      # redirect "/signup"
       flash[:message] = "There was an error signing up!"
       erb :'/users/create_user'
     end
@@ -28,9 +25,8 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    # check if credentials are good, set session?
+    # check if credentials are good, set session.
     if params[:username] != "" && params[:password] != ""
-      # go to the account page
       @user = User.find_by(:username => params[:username])
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
@@ -46,5 +42,4 @@ class UsersController < ApplicationController
     session.clear
     redirect "/login"
   end
-
 end

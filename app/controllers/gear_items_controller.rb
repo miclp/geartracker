@@ -1,6 +1,5 @@
 class GearItemsController < ApplicationController
 
-  # use Rack::Flash
   get '/gear' do
     validate_login
     @user = User.find(session[:user_id])
@@ -47,7 +46,6 @@ class GearItemsController < ApplicationController
     else
       flash[:message] = "Something went wrong with updating your gear."
     end
-    # redirect "/gear/#{@gear.id}"
     erb :'/gear/show_item'
   end
 
@@ -74,6 +72,4 @@ class GearItemsController < ApplicationController
     end
     erb :'/gear/gear'
   end
-
-
 end
