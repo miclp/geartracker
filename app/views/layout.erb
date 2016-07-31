@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  geartracker <br>
+  <h2>geartracker</h2>
+
+  <% if flash.has?(:message) %>
+    <h3><%= flash[:message] %></h3>
+  <% end %>
+
 </head>
 <body>
   <%= yield %>

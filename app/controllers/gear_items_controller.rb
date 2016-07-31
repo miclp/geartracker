@@ -21,6 +21,7 @@ class GearItemsController < ApplicationController
       @gear = GearItem.create(name: params[:name], description: params[:description], gear_type: params[:gear_type], value: params[:value], year: params[:year], image_url: params[:image_url], notes: params[:notes])
       @gear.user_id = @user.id
       @gear.save
+      flash[:message] = "Successfully created new gear."
     elsif params[:name] == ""
       redirect "/gear/new"
     end
@@ -32,15 +33,20 @@ class GearItemsController < ApplicationController
     validate_login
     # update gear item
     @gear = GearItem.find(params[:gear_id])
-    @gear.name = params[:name] unless params[:name] == ""
-    @gear.description = params[:description]
-    @gear.gear_type = params[:gear_type]
-    @gear.value = params[:value]
-    @gear.year = params[:year]
-    @gear.image_url = params[:image_url]
-    @gear.notes = params[:notes]
-    @gear.save
-    redirect "/gear/#{@gear.id}"
+    if @gear.user_id == session[:user_id]
+      @gear.name = params[:name] unless params[:name] == ""
+      @gear.description = params[:description]
+      @gear.gear_type = params[:gear_type]
+      @gear.value = params[:value]
+      @gear.year = params[:year]
+      @gear.image_url = params[:image_url]
+      @gear.notes = params[:notes]
+      @gear.save
+      flash[:message] = "Successfully updated your gear."
+    else
+      flash[:message] = "Something went wrong with updating your gear."
+    end
+    erb :'/gear/show_item'
   end
 
   get '/gear/:id' do
@@ -58,11 +64,12 @@ class GearItemsController < ApplicationController
   post '/gear/delete' do
     validate_login
     @gear = GearItem.find(params[:gear_id])
+    name = @gear.name
     if @gear.user_id == session[:user_id]
       @gear.delete
+      @user = User.find(session[:user_id])
+      flash[:message] = "Successfully deleted #{name}."
     end
-    redirect '/gear'
+    erb :'/gear/gear'
   end
-
-
 end
