@@ -67,9 +67,10 @@ class GearItemsController < ApplicationController
     name = @gear.name
     if @gear.user_id == session[:user_id]
       @gear.delete
+      @user = User.find(session[:user_id])
       flash[:message] = "Successfully deleted #{name}."
     end
-    redirect '/gear'
+    erb :'/gear/gear'
   end
 
 
