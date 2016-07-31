@@ -8,14 +8,17 @@ class UsersController < ApplicationController
 
   post '/signup' do
     # create the user if it doesn't already exist
-    if params[:username] != "" && params[:password] != "" && params[:email] != ""
+
+    if params[:username] != "" && params[:password] != "" && params[:email] != "" && !User.find_by(username: params[:username])
       @user = User.new(username: params[:username], password: params[:password])
       @user.save
       session[:user_id] = @user.id
       flash[:message] = "Thanks for signing up!"
       redirect "/gear"
     else
-      redirect "/signup"
+      # redirect "/signup"
+      flash[:message] = "There was an error signing up!"
+      erb :'/users/create_user'
     end
   end
 
