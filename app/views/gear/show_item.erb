@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+<br><br>
 <% @gear.attributes.each do |attribute| %>
 <%= attribute[0] %>: <%= attribute[1] %><br>
 <% end %>

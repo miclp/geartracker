@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+  # use Rack::Flash
   get '/signup' do
     redirect "/gear" if logged_in?
     erb :'/users/create_user'
@@ -11,7 +12,7 @@ class UsersController < ApplicationController
       @user = User.new(username: params[:username], password: params[:password])
       @user.save
       session[:user_id] = @user.id
-
+      flash[:message] = "Thanks for signing up!"
       redirect "/gear"
     else
       redirect "/signup"
