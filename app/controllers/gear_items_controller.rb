@@ -44,6 +44,8 @@ class GearItemsController < ApplicationController
       @gear.notes = params[:notes]
       @gear.save
       flash[:message] = "Successfully updated your gear."
+    else
+      flash[:message] = "Something went wrong with updating your gear."
     end
     # redirect "/gear/#{@gear.id}"
     erb :'/gear/show_item'
